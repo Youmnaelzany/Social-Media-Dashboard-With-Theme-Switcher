@@ -1,0 +1,187 @@
+---
+import "@/styles/globals.css";
+import { Button } from "@/components/ui/button";
+import { DropdownMenu } from "@/components/ui/dropdown-menu";
+import { ModeToggle } from "@/components/ModeToggle";
+import { Import } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
+---
+
+<script is:inline>
+  const getThemePreference = () => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme");
+    }
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  };
+  const isDark = getThemePreference() === "dark";
+  document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+
+  if (typeof localStorage !== "undefined") {
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.classList.contains("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  }
+</script>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon-32x32.png" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Frontend Mentor | Social Media Dashboard With Theme Switcher</title>
+  </head>
+  <body class="">
+    <header>
+      <div class="flex justify-between mt-8">
+        <div>
+          <h1>Social Media Dashboard</h1>
+          <h2>Total Followers: 23,004</h2>
+        </div>
+        <div>
+          <h3>Dark Mode</h3>
+          <ThemeToggle>
+            <DropdownMenu />
+          </ThemeToggle>
+        </div>
+      </div>
+    </header>
+
+    <secion>
+      <div>
+        <div>
+          <img
+            src="../../public/images/icon-facebook.svg"
+            alt="icon-facebook"
+          />
+          <h3>@nathanf</h3>
+        </div>
+        <p>1987</p>
+        <p>Followers</p>
+        <div>
+          <img src="../../public/images/icon-up.svg" alt="" />
+          <p>12 Today</p>
+        </div>
+      </div>
+      <div>
+        <div>
+          <img
+            src="../../public/images/icon-twitter.svg"
+            alt="icon-twitter.svg"
+          />
+          <h3>@nathanf</h3>
+        </div>
+        <p>1044</p>
+        <p>Followers</p>
+        <div>
+          <img src="../../public/images/icon-up.svg" alt="" />
+          <p>99 Today</p>
+        </div>
+      </div>
+      <div>
+        <div>
+          <img src="../../public/images/icon-instagram.svg" alt="" />
+          <h3>@realnathanf</h3>
+        </div>
+        <p>11k</p>
+        <p>Followers</p>
+        <div>
+          <img src="../../public/images/icon-up.svg" alt="" />
+          <p>1099 Today</p>
+        </div>
+      </div>
+      <div>
+        <div>
+          <img src="../../public/images/icon-youtube.svg" alt="" />
+          <h3>Nathan F.</h3>
+        </div>
+        <p>8239</p>
+        <p>Subscribers</p>
+        <div>
+          <img src="../../public/images/icon-up.svg" alt="" />
+          <p>144 Today</p>
+        </div>
+      </div>
+    </secion>
+
+    <section>
+      <h2>Overview - Today</h2>
+      <div>
+        <div>
+          <div><h3>Page Views</h3></div>
+          <div>
+            <h3>87</h3>
+            <p>3%</p>
+          </div>
+        </div>
+        <div>
+          <div><h3>Likes</h3></div>
+          <div>
+            <h3>52</h3>
+            <p>2%</p>
+          </div>
+        </div>
+        <div>
+          <div>
+            <h3>Likes</h3>
+          </div>
+          <div>
+            <h3>5462</h3>
+            <p>2257%</p>
+          </div>
+        </div>
+        <div>
+          <div><h3>Profile Views</h3></div>
+          <div>
+            <h3>52k</h3>
+            <p>1375%</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div>
+        <div>
+          <div>Retweets</div>
+          <div>
+            <h3>117</h3>
+            <p>303%</p>
+          </div>
+        </div>
+        <div>
+          <div>
+            <h3>Likes</h3>
+          </div>
+          <div>
+            <h3>507</h3>
+            <p>553%</p>
+          </div>
+        </div>
+        <div>
+          <div>
+            <h3>Likes</h3>
+          </div>
+          <div>
+            <h3>107</h3>
+            <p>19%</p>
+          </div>
+        </div>
+        <div>
+          <div><h3>Total Views</h3></div>
+          <div>
+            <h3>1407</h3>
+            <p>12%</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
